@@ -22,5 +22,5 @@ jobs:
           protocol: ${{ secrets.FTP_PROTOCOL }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./ # assuming your server expects the whole project
-          server-dir: /nodeserver.phoenixstech.com/ # change to your app’s path on the server
+          server-dir: ./ # change to your app’s path on the server
           dangerous-clean-slate: true
