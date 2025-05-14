@@ -1,45 +1,4 @@
 
-// const nodemailer = require('nodemailer');
-// const mailchimp = require('@mailchimp/mailchimp_marketing');
-// // const transporter = nodemailer.createTransport({
-// //   service: 'gmail',
-// //   auth: {
-// //     user: 'omozemojeau@gmail.com',
-// //     pass: 'oakh hzze zynk alwm'  
-// //   }
-// // });
-// const transporter = nodemailer.createTransport({
-//   host: 'phoenixstech.com', // Replace with your SMTP host
-//   port: 465, // or 587 if you're using TLS
-//   secure: true, // true for port 465, false for port 587
-//   auth: {
-//     user: 'info@phoenixstech.com', 
-//   }
-// });
-
-// const sendSubscriptionEmail = async (toEmail) => {
-
-//   const mailOptions = {
-//     from: '"phoenixstech" <info@phoenixstech.com>',
-//     to: toEmail,
-//     subject: 'Thank You for Subscribing!',
-//     html: `
-//       <h2>Welcome to phoenixstech!</h2>
-//       <p>You've successfully subscribed to our updates. We'll keep you informed.</p>
-//     `
-//   };
-
-
-
-
-
-//   return transporter.sendMail(mailOptions);
-// };
-
-// module.exports = { sendSubscriptionEmail };
-
-
-
 
 
 
