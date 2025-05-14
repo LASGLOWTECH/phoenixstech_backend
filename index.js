@@ -21,7 +21,7 @@ const { port, allowedDomains } = config;
 app.use(cors({
     origin: allowedDomains, // Use your frontend's origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Define allowed HTTP methods
-    credentials: true // If you need to include cookies or credentials in the request
+    credentials: true 
 }));
 
 app.use(express.json())
