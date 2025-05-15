@@ -1,9 +1,13 @@
+
+const config = require('../config'); // 👈 import your config object
+require('dotenv').config();
+
 const db = require('../db'); // your existing database connection
 const bcrypt = require('bcrypt');
 const generateToken = require('../config/generatetoken')
 
-const ADMIN_EMAIL = 'admin@phoenix.com';
-const ADMIN_PASSWORD = 'phoenix123';
+const ADMIN_EMAIL = config.adminemail
+const ADMIN_PASSWORD = config.adminpass
 const saltRounds = 10;
 
 // LOGIN FUNCTION

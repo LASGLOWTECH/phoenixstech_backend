@@ -16,24 +16,24 @@ const subscribRoutes = require('./routes/subscribe.js')
 const authRoutes = require('./routes/auth.js');
 const { port, allowedDomains } = config;
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like curl or mobile apps)
-        if (!origin || allowedDomains.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-}));
-
 // app.use(cors({
-//     origin: allowedDomains, // Use your frontend's origin
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Define allowed HTTP methods
-//     credentials: true // If you need to include cookies or credentials in the request
+//     origin: function (origin, callback) {
+//         // Allow requests with no origin (like curl or mobile apps)
+//         if (!origin || allowedDomains.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true
 // }));
+
+app.use(cors({
+    origin: allowedDomains, 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    credentials: true 
+}));
 
 app.use(express.json())
 app.use(cookieParser());
