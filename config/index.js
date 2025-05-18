@@ -1,16 +1,14 @@
 const config = {
-    email_pass: process.env.EMAIL_PASSWORD,
-    email_port: process.env.EMAIL_PORT,
-    email_user: process.env.EMAIL_USER,
+email_pass:process.env.EMAIL_PASSWORD,
+email_port:process.env.EMAIL_PORT,
+email_user: process.env.EMAIL_USER,
+ 
 
-    // admin login in
-    adminemail: process.env.ADMIN_EMAIL,
-    adminpass: process.env.ADMIN_PASSWORD,
     // mailchip configuration
     apiKey: process.env.MAILCHIMP_API_KEY,
     server: process.env.MAILCHIMP_SERVER_PREFIX,
     listid: process.env.MAILCHIMP_LIST_ID,
-
+   
     // jt token pass
     // config.js
 
@@ -32,15 +30,17 @@ const config = {
     database_port: process.env.DATABASE_PORT,
 
 
+
+
     allowedDomains: (process.env.NODE_ENV === 'production' ?
         [
             process.env.REMOTE_CLIENT_APP,
-            process.env.REMOTE_SERVER_API
+       
         ] :
         [
             process.env.PORT,
             process.env.LOCAL_CLIENT_APP,
-            process.env.LOCAL_SERVER_APP
+          
         ])
 };
 

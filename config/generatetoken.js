@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 dotenv.config();  // Ensure .env is loaded
 const config = require('./');
-console.log('JWT Secret:', config.secret);
+// console.log('JWT Secret:', config.secret);
 // console.log('JWT Expiry:', config.expires_in);
 
 const generateToken = (adminId) => {
