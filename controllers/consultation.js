@@ -1,8 +1,6 @@
-const express = require('express')
-const db = require('../db.js')
+const db = require('../db.js');
 
-
-const createConsultation = (req, res) => {
+const createConsultation = async (req, res) => {
   const { firstName, lastName, email, message, resume } = req.body;
   // const resume = req.file ? req.file.filename : null;
 
@@ -12,40 +10,33 @@ const createConsultation = (req, res) => {
   if (!firstName || !lastName || !email || !message) {
     return res.status(400).json({ error: 'All fields are required' });
   }
-  const checkSql = 'SELECT * FROM consultation_requests WHERE email = ?';
-  db.query(checkSql, [email], (err, results) => {
-    if (err) {
-      console.error('Database query error:', err);
-      return res.status(500).json({ error: 'Database error' });
-    }
+
+  try {
+    const [results] = await db.query('SELECT * FROM consultation_requests WHERE email = ?', [email]);
 
     if (results.length > 0) {
       return res.status(400).json({ error: 'You have already submitted a message.' });
     }
 
-    const insertSql = "INSERT INTO consultation_requests (`firstName`, `lastName`, `email`, `message`, `resume`) VALUES (?)";
-    const values = [firstName, lastName, email, message, resume];
+    const insertSql = "INSERT INTO consultation_requests (`firstName`, `lastName`, `email`, `message`, `resume`) VALUES (?, ?, ?, ?, ?)";
+    const [result] = await db.query(insertSql, [firstName, lastName, email, message, resume]);
 
-    db.query(insertSql, [values], (err, result) => {
-      if (err) {
-        console.error('Insert error:', err);
-        return res.status(500).json({ error: 'Database error during insert' });
-      }
+    res.status(200).json({ message: 'Details submitted successfully', id: result.insertId });
 
-      return res.status(200).json({ message: 'Details submitted successfully', id: result.insertId });
-    });
-  });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
-
-const getConsultation = (req, res) => {
-  const q = " SELECT * FROM consultation_requests"
-
-  db.query(q, (err, data) => {
-
-    if (err) return res.status(500).send(err)
-    return res.status(200).json(data)
-  })
+const getConsultation = async (req, res) => {
+  try {
+    const [data] = await db.query('SELECT * FROM consultation_requests');
+    res.status(200).json(data);
+  } catch (err) {
+    console.error('Fetch error:', err);
+    res.status(500).json({ error: 'Failed to retrieve consultation requests' });
+  }
 };
 
-module.exports = { getConsultation, createConsultation }
+module.exports = { getConsultation, createConsultation };

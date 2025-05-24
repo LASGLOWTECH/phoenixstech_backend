@@ -19,6 +19,8 @@ const subscribRoutes = require('./routes/subscribe.js');
 const authRoutes = require('./routes/auth.js');
 
 const { port, allowedDomains } = config;
+console.log(allowedDomains);
+
 const app = express();
 
 // 1️⃣ CORS & Middlewares
@@ -54,6 +56,8 @@ const storage = multer.diskStorage({
     const ext = file.originalname.toLowerCase().split('.').pop();
 
     // base folder differs by env
+
+
     const base = isDev
       ? path.join(__dirname, '../client/public/upload')
       : path.join(__dirname, 'uploads');
@@ -109,7 +113,13 @@ app.use('/auth', authRoutes);
 app.use('/subscribe', subscribRoutes);
 app.use('/contacts', contactRoutes);
 
-// 9️⃣ Start the server
+
+// health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+// 9️⃣ Start the servers
 app.listen(port, () => {
   console.log(`Server listening on port ${port} (dev: ${isDev})`);
 });

@@ -1,38 +1,18 @@
-const dotenv = require('dotenv');
-const config = require('./config');
-
+// db.js
+require('dotenv').config();
 const mysql = require('mysql2');
+const config = require('./config'); // adjust path as needed
 
-// Load environment variables
-
-
-dotenv.config();
-const {
-    database_host,
-    database_user,
-    database_password,
-    database,
-    database_port,
-} = config;
-
-const db = mysql.createConnection({
-    host: database_host,
-    user: database_user,
-    password: database_password,
-    database: database,
-    port: database_port,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+const pool = mysql.createPool({
+  host: config.database_host,
+  user: config.database_user,
+  password: config.database_password,
+  database: config.database,
+  port: config.database_port,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error('Database connection failed:', err);
-        return;
-    }
-    console.log('Connected to MySQ database.');
-    console.log('db')
-});
-
-module.exports = db;
+// ✅ Use promise-based pool
+module.exports = pool.promise();
