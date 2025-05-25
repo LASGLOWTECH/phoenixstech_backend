@@ -83,7 +83,7 @@ const imageUpload = multer({
   }
 });
 
-// 7️⃣ Routes for uploads
+// 7️⃣ Routes for uploadsn only
 app.post(
   '/upload/images',
   imageUpload.single('file'),
@@ -114,7 +114,7 @@ app.use('/subscribe', subscribRoutes);
 app.use('/contacts', contactRoutes);
 
 
-// health check endpoint
+// health check endpointn yes
 app.get('/api/health', (req, res) => {
   res.status(200).send('OK');
 });
